@@ -1,0 +1,139 @@
+.add-overlay{
+  position: absolute;
+  border-radius: 50px;
+  background-color: rgb(227, 227, 227);
+  height: 60vh;
+  aspect-ratio: 3/4;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom:0;
+  margin: auto;
+  flex-direction: column;
+  gap: 2%;
+  align-items: center;
+  min-height: 320px;
+}
+
+.add-overlay-hidden{
+  z-index: -1;
+  opacity: 0;
+}
+
+
+
+.color-section-overlay{
+  height: 15%;
+  flex: 1;
+  width: 100%;
+  border-top-left-radius:50px ;
+  border-top-right-radius:50px ;
+}
+
+.non-color-overlay{
+  width: 100%;
+  flex:2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--mainBlue);
+  margin-bottom: 3%;
+}
+
+.non-color-overlay div{
+  padding: 3%;
+  font-size: 2vh;
+}
+
+
+.non-color-overlay input{
+  background-color: rgb(255, 255, 255);
+}
+
+
+.input-task{
+  margin-bottom: 2%;
+  width: 70%;
+  height: 3vh;
+  border: none;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 1.5vh;
+  padding: 3px 8px;
+  box-shadow: inset 0px 0px 5px rgba(0,0,0,0.1);
+}
+
+.input-date{
+  margin-bottom: 4%;
+  height: 3vh;
+  border: none;
+  border-radius: 100px;
+  padding: 3px 12px;
+  text-align: center;
+  font-size: 1.5vh;
+  box-shadow: inset 0px 0px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.input-description{
+  margin-bottom: 2%;
+  width: 70%;
+  aspect-ratio: 21/9;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1.5vh;
+  padding: 3px 8px;
+  box-shadow: inset 0px 0px 5px rgba(0,0,0,0.1);
+}
+
+.overlay-buttons{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-evenly; 
+  padding-bottom: 10%;
+  margin-top: 5%;
+
+}
+.overlay-buttons img{
+  height: 65%;
+  aspect-ratio: 1;
+  cursor: pointer;
+
+}
+.enter-button{
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button{
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-height:600px) {
+  .add-overlay{
+    margin: 0 auto;
+    top: 120px;
+  }
+  .add-overlay input{
+    font-size: 10px;
+  }
+  .add-overlay div{
+    font-size: 10px;
+  }
+  .add-overlay textarea{
+    font-size: 10px;
+  }
+}

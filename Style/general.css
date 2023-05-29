@@ -1,0 +1,37 @@
+:root{
+  --mainBlue : #29303C;
+  --white:#EEEEEE;
+  --work:#4a5d29;
+  --personal:#389bb2;
+  --health:#2F4F4F;
+  --school:#007272;
+  --red: #b30a0a;
+  --green:#277464;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  transition: opacity 1s;
+}
+
+html{
+  font-family: Raleway, 'Times New Roman', Times, serif;
+}
+
+body{
+  background-color: var(--white);
+}
+
+.non-overlay{
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.non-overlay-hidden{
+  opacity: 0.75;
+  z-index: -1;
+}

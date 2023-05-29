@@ -1,0 +1,17 @@
+
+
+#header{
+  background-color: var(--mainBlue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 9vh;
+  min-height: 60px;
+  z-index: 1;
+  width: 100%;
+}
+
+#welcome-text{
+  color: var(--white);
+  font-size: 250%;
+}

@@ -1,0 +1,143 @@
+#side-bar{
+  background-color: var(--mainBlue);
+  position: absolute;
+  padding-top: 20px;
+  top: 9.15vh;
+  left: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10vw;
+  max-width: 100px;
+  gap: 4vh;
+}
+
+#add-button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10vw;
+  max-width: 80px;
+  gap: 3.6vh;
+  height: auto;
+
+}
+
+
+.main-circle{
+  width: 60%;
+  height: auto;
+  background: transparent;
+  cursor: pointer;
+  transition: all 1s;
+  z-index: 1;
+  fill:#52AB98
+}
+
+
+.small-circle{
+  width: 20%;
+  opacity: 0;
+  height: auto;
+  transform: translateY( calc(var(--order) * -6vh));
+  cursor: pointer;
+  z-index: 0;
+}
+
+.small-circle2{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.small-circle-animation{
+  animation: appear 0.2s  linear calc( var(--order) * 0.2s - 0.2s) normal forwards;
+}
+
+
+.small-circle-animation2{
+  animation: disappear 0.4s linear calc(0.4s - var(--order)*0.1s) normal forwards;
+}
+
+.side-button{
+  display: flex;
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  font-size: 90%;
+  cursor: pointer;
+  transform: translateY(-22vh);
+  transition: transform 0.8s;
+  background-color:#38434e;
+  padding: 5px 8px;
+  min-height: 20px;
+  height: 3vh;
+  width: 65%;
+  border-radius: 100px;
+}
+
+.side-button1:hover{
+  background-color: var(--work);
+  color: var(--white);
+}
+
+.side-button2:hover{
+  background-color: var(--personal);
+  color: #616161;
+}
+
+.side-button3:hover{
+  background-color: var(--health);
+  color: var(--white);
+}
+
+.side-button4:hover{
+  background-color: var(--school);
+  color: var(--white);
+}
+
+.add-work{
+  fill:var(--work);
+}
+
+.add-personal{
+  fill:var(--personal);
+}
+
+.add-health{
+  fill:var(--health);
+}
+
+.add-school{
+  fill:var(--school);
+}
+
+
+@keyframes appear {
+  0%{
+    transform: translateY( calc(var(--order) * -6vh));
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  0%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  100%{
+    transform: translateY( calc(var(--order) * -6vh));
+    opacity: 0;
+  }
+}
+
+@media (max-height: 660px) {
+  #side-bar{
+    top:61.5px
+  }
+}
