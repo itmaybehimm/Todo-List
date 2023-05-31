@@ -25,11 +25,14 @@ body{
 
 .non-overlay{
   min-height: 100vh;
+  min-width: 100vw;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
+
 
 .non-overlay-hidden{
   opacity: 0.75;
