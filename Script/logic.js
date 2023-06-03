@@ -10,6 +10,8 @@ else{
   todoList=JSON.parse(todoListString);
 }
 
+let clickArr=[false,false,false,false]
+
 let colors = null
 
 fetch('./Script/colors.json')
@@ -310,5 +312,114 @@ function emptyArrays(){
   healthTodo=[];
 }
 
+function removeTodo(){
+  document.querySelectorAll('.adjust-window').forEach(element=>{
+    element.innerHTML=''
+  })
+}
+
+function handleSideButton(button){
+  let classButton=button.classList[1].at(-1);
+  let item=Number(classButton.at(-1))-1;
+  clickArr[item]=!clickArr[item];
+  const allTodoElement=document.querySelector('.all-todo')
+
+  removeTodo();
+  adjustColor(button,item);
+
+  if(clickArr.every((item)=>item===false)){
+    removeAllCardEffects();
+    loadTodoCards();
+    return
+  } 
+
+  allTodoElement.style.position='absolute'
+
+  if(clickArr[0]===true){
+    loadWorkTodo();
+    document.querySelector('.work-all-todo').style.position='static'
+  }
+  else{
+    document.querySelector('.work-all-todo').style.position='absolute'
+  }
+
+  if(clickArr[1]===true){
+    loadPersonalTodo();
+    document.querySelector('.personal-all-todo').style.position='static'
+  }
+  else{
+    document.querySelector('.personal-all-todo').style.position='absolute'
+  }
+
+  if(clickArr[2]===true){
+    loadHealthTodo();
+    document.querySelector('.health-all-todo').style.position='static'
+  }
+  else{
+    document.querySelector('.health-all-todo').style.position='absolute'
+  }
+
+  if(clickArr[3]===true){
+    loadSchoolTodo();
+    document.querySelector('.school-all-todo').style.position='static'
+  }
+  else{
+    document.querySelector('.school-all-todo').style.position='absolute'
+  }
+}
+
+function removeAllCardEffects(){
+  document.querySelectorAll('.adjust-window').forEach(element=>{
+    element.style.position='static'
+  })
+}
+function adjustColor(button,typeVal){
+  let classArr=button.classList
+  switch (typeVal){
+    case 0:
+      if(clickArr[0]){
+        classArr.add('work-side-clicked')
+      }
+      else{
+        classArr.remove('work-side-clicked')
+      }
+      break;
+
+    case 1:
+      if(clickArr[1]){
+        classArr.add('personal-side-clicked')
+      }
+      else{
+        classArr.remove('personal-side-clicked')
+      }
+      break;
+
+    case 2:
+      if(clickArr[2]){
+        classArr.add('health-side-clicked')
+      }
+      else{
+        classArr.remove('health-side-clicked')
+      }
+      break;
+
+    case 3:
+      if(clickArr[3]){
+        classArr.add('health-side-clicked')
+      }
+      else{
+        classArr.remove('health-side-clicked')
+      }
+      break;
+  }
+}
+
 checkWindowSize();
+
 addEventListener("resize", () => {checkWindowSize()})
+
+document.querySelectorAll('.side-button').forEach(button=>{
+  button.addEventListener('click',()=>{
+    handleSideButton(button)
+  })
+})

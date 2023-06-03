@@ -1,11 +1,12 @@
 .adjust-window{
   flex-grow: 1;
   padding-right: 1vw;
-  padding-top: 10px;
   display: flex;
   overflow-x: scroll;
   gap:5vw;
-  padding-top: 5vh;
+  padding-bottom: 2px;
+  padding-top: 8vh;
+
 } 
 
 .todo-text{

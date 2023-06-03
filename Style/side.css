@@ -112,6 +112,21 @@
   fill:var(--school);
 }
 
+.work-side-clicked{
+  background-color: var(--work);
+}
+
+.personal-side-clicked{
+  background-color: var(--personal);
+}
+
+.health-side-clicked{
+  background-color: var(--health);
+}
+
+.school-side-clicked{
+  background-color: var(--school);
+}
 
 @keyframes appear {
   0%{
