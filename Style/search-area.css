@@ -91,9 +91,9 @@
     transform: rotate(360deg);
   }
 }
-/* @media (max-width:1082px) {
+@media (max-width:1082px) {
   #weather-icon-div,#temperature-div{
     position: absolute;
     opacity: 0;
   }
-} */
+}

@@ -11,6 +11,7 @@
   width: 10vw;
   max-width: 100px;
   gap: 4vh;
+  z-index:1;
 }
 
 #add-button{
@@ -75,6 +76,7 @@
   width: 65%;
   border-radius: 100px;
 }
+
 
 .side-button1:hover{
   background-color: var(--work);

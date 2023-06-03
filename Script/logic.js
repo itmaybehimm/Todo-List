@@ -24,7 +24,8 @@ let workTodo=[];
 let personalTodo=[];
 let healthTodo=[];
 let schoolTodo=[];
-
+let searchTodo=[];
+let isSeaching = false;
 
 
 function handleAddTodo(element){
@@ -102,6 +103,9 @@ function checktTypeobj(obj){
 function loadTodoCards(){
   console.log(todoList);
   divideTodo();
+  if(isSeaching){
+    handleSearch();
+  }
   loadAllTodo();
   loadWorkTodo();
   loadPersonalTodo();
@@ -244,6 +248,34 @@ function loadSchoolTodo(){
   })
 }
 
+function loadSearchTodo(){
+  const search= document.querySelector('.search-all-todo');
+  let stringHTML=''
+  for(let i=0;i<searchTodo.length;i++){
+    stringHTML+=`
+      <div class='todo-card'>
+        <div class='card-color todo-color-${searchTodo[i].type}'></div>
+        <div class='todo-content'>
+          <p class='todo-task-text'>Task:</p>
+          <div class='todo-task'>${searchTodo[i].task}</div>
+          <p class='todo-date-text'>Date:</p>
+          <div class='todo-date'>${searchTodo[i].date}</div>
+          <p class='todo-description-text'>Description:</p>
+          <div class='todo-description'><span>${searchTodo[i].description}</span></div>
+        </div>
+        <button id='delete-search-todo-${i}' class='delete-todo delete-search-todo' style='
+          background-color:gray
+        '><img src='Images/trash.png'></button>
+      </div>
+    `
+  }
+  search.innerHTML=stringHTML
+  // const deleteButtonElements = document.querySelectorAll('.delete-search-todo')
+  // deleteButtonElements.forEach(button=>{
+  //   button.addEventListener('click',()=>{deleteTodo(button,'search')})
+  // })
+}
+
 
 function deleteTodo(button,type){
   const number = Number(button.id.charAt(button.id.length-1));
@@ -322,17 +354,25 @@ function handleSideButton(button){
   let classButton=button.classList[1].at(-1);
   let item=Number(classButton.at(-1))-1;
   clickArr[item]=!clickArr[item];
-  const allTodoElement=document.querySelector('.all-todo')
+
 
   removeTodo();
   adjustColor(button,item);
+  if(isSeaching){
+    handleSearch();
+    return;
+  }
+  adjustAccordingToPressed();
+}
+
+function adjustAccordingToPressed(){
 
   if(clickArr.every((item)=>item===false)){
     removeAllCardEffects();
     loadTodoCards();
     return
   } 
-
+  const allTodoElement=document.querySelector('.all-todo')
   allTodoElement.style.position='absolute'
 
   if(clickArr[0]===true){
@@ -370,8 +410,18 @@ function handleSideButton(button){
 
 function removeAllCardEffects(){
   document.querySelectorAll('.adjust-window').forEach(element=>{
+    if(element.classList.contains('search-all-todo')) return
     element.style.position='static'
+    element.style.zIndex = '0'
+    element.style.transition='transform 0.2s,opacity 0.2s'
+    element.style.opacity='1'
   })
+  const searchElement=document.querySelector('.search-all-todo');
+  searchElement.style.position='absolute';
+  searchElement.style.zIndex = '-1'
+  searchElement.style.transition='all 0s'
+  searchElement.style.opacity='0'
+  
 }
 function adjustColor(button,typeVal){
   let classArr=button.classList
@@ -414,6 +464,54 @@ function adjustColor(button,typeVal){
   }
 }
 
+function hideCards(){
+  document.querySelectorAll('.adjust-window').forEach(element=>{
+    element.style.position='absolute';
+    element.style.zIndex = '-1'
+    element.style.transition='all 0s'
+    element.style.opacity='0'
+  })
+}
+
+function setupSearchDiv(){
+  const element = document.querySelector('.search-all-todo')
+  element.style.position='static'
+  element.style.zIndex = '0'
+  element.style.transition='transform 0.2s,opacity 0.2s'
+  element.style.opacity='1'
+}
+
+function handleSearch(){
+  searchTodo=[];
+  const stringUser=document.querySelector('.search-bar').value.toUpperCase();
+  isSeaching=true
+  if(stringUser===''){
+    isSeaching=false
+    removeAllCardEffects();
+    adjustAccordingToPressed();
+    return;
+  }
+  todoList.forEach(item=>{
+    const taskMain=item.task.toUpperCase()
+    const typeMain=item.type
+    if(taskMain.includes(stringUser)) {
+      if(clickArr.every((item)=>item===false)){
+        searchTodo.push(item);
+      } 
+      else{
+        if(clickArr[0] && typeMain==='work') searchTodo.push(item);
+        if(clickArr[1] && typeMain==='personal') searchTodo.push(item);
+        if(clickArr[2] && typeMain==='health') searchTodo.push(item);
+        if(clickArr[3] && typeMain==='school') searchTodo.push(item);
+      }
+    }
+  })
+  console.log(searchTodo)
+  hideCards();
+  setupSearchDiv();
+  loadSearchTodo();
+}
+
 checkWindowSize();
 
 addEventListener("resize", () => {checkWindowSize()})
@@ -423,3 +521,6 @@ document.querySelectorAll('.side-button').forEach(button=>{
     handleSideButton(button)
   })
 })
+
+document.querySelector('.search-bar').addEventListener('keyup',handleSearch);
+
